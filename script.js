@@ -23,3 +23,15 @@ function determineWinner(humanChoice, computerChoice) {
     }
 };
 
+function createMessage(humanChoice, computerChoice, winner) {
+    if (!winner) {
+        return `invalid input: ${humanChoice} is not a valid input`
+    } else if (winner === "user") {
+        return `You win! ${humanChoice} beats ${computerChoice}.`
+    } else if (winner === "computer") {
+        return `You lose! ${computerChoice} beats ${humanChoice}`
+    } else {
+        return `It's a tie! both players chose ${humanChoice}`
+    }
+}
+
