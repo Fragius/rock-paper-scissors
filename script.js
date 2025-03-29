@@ -35,3 +35,7 @@ function createMessage(humanChoice, computerChoice, winner) {
     }
 }
 
+function playRound(humanChoice, computerChoice, message) {
+    const winner = determineWinner(humanChoice, computerChoice);
+    alert(message(humanChoice, computerChoice, winner));
+};
