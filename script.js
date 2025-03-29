@@ -6,11 +6,10 @@ function getComputerChoice() {
 };
 
 function getHumanChoice() {
-    return prompt("Enter either Rock, paper or scissors");
+    return prompt("Enter either rock, paper or scissors")
 }
 
-function determineWinner(humanChoice, computerChoice) {
-    humanChoice = humanChoice.toLowerCase();
+function determineWinner(humanChoice, computerChoice) { 
     if (computerChoice === humanChoice) {
         return "tie";
     }
@@ -35,7 +34,36 @@ function createMessage(humanChoice, computerChoice, winner) {
     }
 }
 
-function playRound(humanChoice, computerChoice, message) {
-    const winner = determineWinner(humanChoice, computerChoice);
-    alert(message(humanChoice, computerChoice, winner));
+function playRound(humanChoice, computerChoice) {
+    return winner = determineWinner(humanChoice, computerChoice);
 };
+
+function incrementWinner(winner, humanScore, computerScore) {
+    if (winner === "user") {
+        humanScore++;
+    } else if (winner === "computer") {
+        computerScore++;
+    }
+    return [humanScore, computerScore];
+}
+
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+    for (let r = 0; r < 5; r++) {
+        let computerChoice = getComputerChoice();
+        let humanChoice = getHumanChoice().toLowerCase();
+        const winner = playRound(humanChoice, computerChoice);
+        [humanScore, computerScore] = incrementWinner(winner, humanScore, computerScore);
+        alert(createMessage(humanChoice, computerChoice, winner));
+    }
+    if (humanScore > computerScore) {
+        alert("You won!");
+    } else if ( computerScore < humanScore) {
+        alert("You lost!");
+    } else {
+        alert("It's a tie!");
+    }
+};
+
+playGame();
