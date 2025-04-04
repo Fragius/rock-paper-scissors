@@ -5,25 +5,36 @@ let humanScore =0;
 const CHOICES = ["rock", "paper", "scissors"];
 
 const container = document.querySelector(".container");
+const roundDiv = document.createElement("div");
+roundDiv.className = "round";
+container.appendChild(roundDiv);
+roundDiv.textContent = "Round 0";
+
+const middleContainer = document.createElement("div");
+middleContainer.className = "middle";
+container.appendChild(middleContainer);
+
+const roundWinnerDiv =  document.createElement("div");
+middleContainer.appendChild(roundWinnerDiv);
+const btnDiv = document.createElement("div");
+btnDiv.className = "btnContainer";
 const rockBtn = document.createElement("button");
 const paperBtn = document.createElement("button");
 const scissorsBtn = document.createElement("button");
 const gameWinnerDisplay = document.createElement("div");
-container.appendChild(rockBtn);
-container.appendChild(paperBtn);
-container.appendChild(scissorsBtn);
-container.appendChild(gameWinnerDisplay);
+middleContainer.appendChild(btnDiv);
+btnDiv.appendChild(rockBtn);
+btnDiv.appendChild(paperBtn);
+btnDiv.appendChild(scissorsBtn);
+middleContainer.appendChild(gameWinnerDisplay);
 rockBtn.textContent = "Rock";
 paperBtn.textContent = "Paper";
 scissorsBtn.textContent = "Scissors";
 
-const resultsDiv = document.createElement("div");
-container.appendChild(resultsDiv);
-resultsDiv.textContent = "Round 0 Human Score 0 Computer Score 0";
-
-const messageDiv =  document.createElement("div");
-container.appendChild(messageDiv);
-
+const scoresDiv = document.createElement("div");
+scoresDiv.className = "score";
+container.appendChild(scoresDiv);
+scoresDiv.textContent = "Human Score 0 Computer Score 0";
 console.log(container);
 rockBtn.addEventListener("click", () => playRound("rock"));
 paperBtn.addEventListener("click", () => playRound("paper"));
@@ -69,9 +80,10 @@ function playRound(humanChoice) {
     } 
     const computerChoice = getComputerChoice();
     const winner = determineWinner(humanChoice, computerChoice);
-    messageDiv.textContent = createMessage(humanChoice, computerChoice, winner);
+    roundWinnerDiv.textContent = createMessage(humanChoice, computerChoice, winner);
     incrementWinner(winner);
-    resultsDiv.textContent = `Round ${round} Human Score ${humanScore} Computer Score ${computerScore}`;
+    roundDiv.textContent = `Round ${round}`
+    scoresDiv.textContent = `Human Score ${humanScore} Computer Score ${computerScore}`;
     if (round === 5) {
         humanScore === computerScore 
         ? gameWinnerDisplay.textContent = "It's a tie!" 
